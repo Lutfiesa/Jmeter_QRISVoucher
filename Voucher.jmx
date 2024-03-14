@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.2">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Voucher" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.delayedStart">false</boolProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="staging" elementType="Argument">
+              <stringProp name="Argument.name">staging</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.value">staging-saas-apipg.qoin.id</stringProp>
+            </elementProp>
+            <elementProp name="reqin" elementType="Argument">
+              <stringProp name="Argument.name">reqin</stringProp>
+              <stringProp name="Argument.value">/saas/requestin</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="reqout" elementType="Argument">
+              <stringProp name="Argument.name">reqout</stringProp>
+              <stringProp name="Argument.value">/saas/requestout</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Login" enabled="true">
+          <stringProp name="filename">C:/Users/lutfi/OneDrive/Dokumen/apache-jmeter-5.6.2/QRIS Voucher/Login.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">Pin,Phone</stringProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Initialization" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;Platform&quot;: &quot;qoinapp-stg&quot;,&#xd;
+    &quot;Secret&quot;: &quot;Q599ANXQUAXQHRPUDZIHXD&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${staging}</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">/access/v2/initialization</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <boolProp name="HTTPSampler.md5">false</boolProp>
+          <intProp name="HTTPSampler.ipSourceType">0</intProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Accept</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Platformkey" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">Platformkey</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">.Data.Platformkey</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Login Mobile" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;Phone&quot;: &quot;${Phone}&quot;,&#xd;
+    &quot;Pin&quot;: ${Pin}&quot;,&#xd;
+    &quot;InstallId&quot;: &quot;install_id&quot;,&#xd;
+    &quot;DeviceId&quot;: &quot;06dd3f8a1dbebdd0&quot;,&#xd;
+    &quot;DeviceType&quot;: &quot;android&quot;,&#xd;
+    &quot;Type&quot;:&quot;wa&quot;,&#xd;
+    &quot;DeviceBrand&quot;: &quot;Samsung&quot;,&#xd;
+    &quot;DeviceModel&quot;: &quot;Samsung a52&quot;,&#xd;
+    &quot;Location&quot;: &quot;Jakarta&quot;,&#xd;
+    &quot;IP&quot;: &quot;10.32.103.91&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${staging}</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">/access/v2/login/app</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <boolProp name="HTTPSampler.md5">false</boolProp>
+          <intProp name="HTTPSampler.ipSourceType">0</intProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Accept</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Platformkey</stringProp>
+                <stringProp name="Header.value">0e02e9a4a1e4b8ceee828dfcd7b25e1454122f12b87c9eba754e42f4d4be831ca9724c0571ef8cdae4f340298f08963055f8b910612e8cb96f4e2f8d1c969e60185a67f21d3a325c755309f8ced778b2d4f928000599b6f2038ff0f67a793856a9cb7f09094a5155b02be5fc9af811e31bac852ffdfe1aa4f2d896ab5aee3ec1f3319be9ea9813af489f2cae68ad3c2d8a175acea187b7230b412ebbb94163e00c7cbd4df083d6a349138498eedab552a59493316e41823bf07dd646ddb575df3d6e58b76469b0631d94303cb2b0695749a7bd1f7406336ccb71b1d7235643b0491091320c0ba9e52453c510559b7fe626980185949d7e0817950ae91146e18f93594b694671452c629a0556a1f038a6eb1a6eff8529f33762b709364c9f48c00d87eca5dd5db7a8e0e024d626258a56320783eea5e8d67c6e21e4517485e5c5cd1bde16d92dea8bad4f1d975470d79e9a5bf1a26ce89bdee84fc151e9f2052e29873d3f38d104221cb69bbbf270246adc5c45c57c857e0fc91994b2f368ad12f73a539fd1a5dbba6d07e0f849557e309f34bc63869f4dee4b9b86bc14740bc8ebdfe5354a084440b60ad7769e362ad314d22a69708de3e5d99d1e684383ac5be64dac887f5fdf399b09bad6c59f22360472f9d6581e47d5b3673273c5c0faf41c98d74d566755b5926559d3f433cc17d4b22ba582e29d66b5192eece0a031bd</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Token" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">Token</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">.Data.Token</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Product (reqin)" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+  &quot;TicketId&quot;: &quot;${guid}&quot;,&#xd;
+  &quot;Subject&quot;: &quot;transaction&quot;,&#xd;
+  &quot;SubjectType&quot;: &quot;merchant&quot;,&#xd;
+  &quot;SubjectIdentifier&quot;: &quot;qrisvoucher&quot;,&#xd;
+  &quot;Action&quot;: &quot;getproductqris&quot;,&#xd;
+  &quot;ResourceType&quot;: &quot;data&quot;,&#xd;
+  &quot;Resource&quot;: &quot;${randomResource}&quot;,&#xd;
+  &quot;ResourceId&quot;: &quot;${randomResourceId}&quot;,&#xd;
+  &quot;ClientId&quot;: 54,&#xd;
+  &quot;UserId&quot;: 410,&#xd;
+  &quot;Date&quot;: &quot;2023-01-2020:10:00&quot;,&#xd;
+  &quot;Data&quot;: {&#xd;
+    &quot;limit&quot;: 100,&#xd;
+    &quot;page&quot;: 1&#xd;
+  }&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${staging}</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">${reqin}</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <boolProp name="HTTPSampler.md5">false</boolProp>
+          <intProp name="HTTPSampler.ipSourceType">0</intProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Platformkey</stringProp>
+                <stringProp name="Header.value">${Platformkey}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Idempotency-Key</stringProp>
+                <stringProp name="Header.value">${idempotency}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${Token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+def randNum(int min, int max) {
+    return Math.round((Math.random() * Math.abs(max - min)) + min);
+}
+
+def randomNumber = randNum(1000, 9999);
+def guid = UUID.randomUUID().toString();
+
+vars.put(&quot;guid&quot;, guid);
+vars.put(&quot;randomTicketId&quot;, &quot;${randomNumber}&quot;);
+vars.put(&quot;randomResource&quot;, &quot;${randNum(1000, 9999)}&quot;);
+vars.put(&quot;randomResourceId&quot;, &quot;${randNum(1000, 9999)}&quot;);
+
+//GENERATE IDEMPOTENCY
+Date currentDate = new Date();
+SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSSSSS&quot;);
+String dates = dateFormat.format(currentDate);
+
+String requestBody = sampler.getArguments().getArgument(0).getValue();
+vars.put(&quot;request_data&quot;, requestBody);
+
+String requestData = vars.get(&quot;request_data&quot;);
+
+String str = requestData + dates;
+log.info(&quot;Request Data is &quot; + str);
+
+MessageDigest md = MessageDigest.getInstance(&quot;MD5&quot;);
+
+byte[] messageDigest = md.digest(str.getBytes());
+
+BigInteger no = new BigInteger(1, messageDigest);
+
+String hashtext = no.toString(16);
+
+while (hashtext.length() &lt; 32) {
+    hashtext = &quot;0&quot; + hashtext;
+}
+
+vars.put(&quot;idempotency&quot;, String.valueOf(hashtext));</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Tiketid" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">ticketId</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">.TicketId</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Subject" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">subject</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">.Subject</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="SubjectType" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">subjectType</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">.SubjectType</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="SubjectIdentifier" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">subjectIdentifier</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">.SubjectIdentifier</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Get Product" enabled="true">
+          <stringProp name="WhileController.condition">${__jexl3(&quot;${StatusCode}&quot; != 200,)}</stringProp>
+        </WhileController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Product (reqout)" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+&#xd;
+    &quot;TicketId&quot;: &quot;${ticketId}&quot;,&#xd;
+    &quot;Subject&quot;: &quot;${subject}&quot;,&#xd;
+    &quot;SubjectType&quot;: &quot;${subjectType}&quot;,&#xd;
+    &quot;SubjectIdentifier&quot;: &quot;${subjectIdentifier}&quot;&#xd;
+&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${staging}</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.path">${reqout}</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.image_parser">false</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <boolProp name="HTTPSampler.md5">false</boolProp>
+            <intProp name="HTTPSampler.ipSourceType">0</intProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Platformkey</stringProp>
+                  <stringProp name="Header.value">${Platformkey}</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Idempotency-Key</stringProp>
+                  <stringProp name="Header.value">${idempotency}</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Authorization</stringProp>
+                  <stringProp name="Header.value">Bearer ${Token}</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">StatusCode</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">.StatusCode</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+              <stringProp name="TestPlan.comments">statuscode</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">//vars.put(&quot;StatusCode&quot;,prev.getResponseCode())
+log.info(&quot;${StatusCode}&quot;)</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Order Voucher (reqin)" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+  &quot;TicketId&quot;: &quot;${guid}&quot;,&#xd;
+  &quot;Subject&quot;: &quot;transaction&quot;,&#xd;
+  &quot;SubjectType&quot;: &quot;merchant&quot;,&#xd;
+  &quot;SubjectIdentifier&quot;: &quot;qrisvoucher&quot;,&#xd;
+  &quot;Action&quot;: &quot;orderqris&quot;,&#xd;
+  &quot;ResourceType&quot;: &quot;data&quot;,&#xd;
+  &quot;Resource&quot;: &quot;${randomResource}&quot;,&#xd;
+  &quot;ResourceId&quot;: &quot;${randomResourceId}&quot;,&#xd;
+  &quot;ClientId&quot;: 54,&#xd;
+  &quot;UserId&quot;: 410,&#xd;
+  &quot;Date&quot;: &quot;2023-01-2020:10:00&quot;,&#xd;
+  &quot;Data&quot;: {&#xd;
+     &quot;Data&quot;: {&#xd;
+			&quot;product_code&quot;: &quot;CPN-ISOVE&quot;,&#xd;
+			&quot;qty&quot;: 1,&#xd;
+			&quot;name&quot;: &quot;eLL&quot;,&#xd;
+			&quot;email&quot;: &quot;lulu@loyalto.id&quot;,&#xd;
+			&quot;customer_number&quot;: &quot;6281212882818&quot;,&#xd;
+			&quot;phone&quot;: &quot;6281212882818&quot;,&#xd;
+			&quot;method&quot;: &quot;balance&quot;,&#xd;
+			&quot;campaign_id&quot;: 0&#xd;
+		},&#xd;
+		&quot;TrxType&quot;: 96,&#xd;
+		&quot;PaymentType&quot;: 3,&#xd;
+		&quot;Status&quot;: 1,&#xd;
+		&quot;Amount&quot;: &quot;4000&quot;,&#xd;
+		&quot;Latitude&quot;: &quot;37.4219983&quot;,&#xd;
+		&quot;Longitude&quot;: &quot;-122.084&quot;,&#xd;
+		&quot;PPN&quot;: &quot;0.0032&quot;,&#xd;
+		&quot;PPNAmount&quot;: &quot;33600000&quot;,&#xd;
+		&quot;Notes&quot;: &quot;1.3.9-alpha+102,android&quot;,&#xd;
+		&quot;InstallId&quot;: &quot;d55kJZBUR7asSZi69SxwgV:APA91bEgiBbtakNE8W8hXzYsJgNBw5_zzVxkp4JxamSrj7iRVOA-xPMWPL6kbDgWy25YkGnNVYGwuvkMVEn09Kud8kdEXGmJCj_hX8l6oKlG4ZHmOlqDOGq9RDRAMBhmXUXe7uJAQfoi&quot;,&#xd;
+		&quot;DeviceType&quot;: &quot;android&quot;,&#xd;
+		&quot;FullName&quot;: &quot;eLL&quot;,&#xd;
+		&quot;PhoneNumber&quot;: &quot;6281212882818&quot;,&#xd;
+		&quot;EmailAddress&quot;: &quot;haykal@qoin.id&quot;,&#xd;
+		&quot;isPromo&quot;: false,&#xd;
+		&quot;isCashback&quot;: false,&#xd;
+		&quot;UserId&quot;: 2299&#xd;
+	}&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${staging}</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">${reqin}</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <boolProp name="HTTPSampler.md5">false</boolProp>
+          <intProp name="HTTPSampler.ipSourceType">0</intProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Platformkey</stringProp>
+                <stringProp name="Header.value">${Platformkey}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Idempotency-Key</stringProp>
+                <stringProp name="Header.value">${idempotency}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${Token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+def randNum(int min, int max) {
+    return Math.round((Math.random() * Math.abs(max - min)) + min);
+}
+
+def randomNumber = randNum(1000, 9999);
+def guid = UUID.randomUUID().toString();
+
+vars.put(&quot;guid&quot;, guid);
+vars.put(&quot;randomTicketId&quot;, &quot;${randomNumber}&quot;);
+vars.put(&quot;randomResource&quot;, &quot;${randNum(1000, 9999)}&quot;);
+vars.put(&quot;randomResourceId&quot;, &quot;${randNum(1000, 9999)}&quot;);
+
+//GENERATE IDEMPOTENCY
+Date currentDate = new Date();
+SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSSSSS&quot;);
+String dates = dateFormat.format(currentDate);
+
+String requestBody = sampler.getArguments().getArgument(0).getValue();
+vars.put(&quot;request_data&quot;, requestBody);
+
+String requestData = vars.get(&quot;request_data&quot;);
+
+String str = requestData + dates;
+log.info(&quot;Request Data is &quot; + str);
+
+MessageDigest md = MessageDigest.getInstance(&quot;MD5&quot;);
+
+byte[] messageDigest = md.digest(str.getBytes());
+
+BigInteger no = new BigInteger(1, messageDigest);
+
+String hashtext = no.toString(16);
+
+while (hashtext.length() &lt; 32) {
+    hashtext = &quot;0&quot; + hashtext;
+}
+
+vars.put(&quot;idempotency&quot;, String.valueOf(hashtext));</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Tiketid" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">ticketId2</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">.TicketId</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Subject" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">subject2</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">.Subject</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="SubjectType" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">subjectType2</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">.SubjectType</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="SubjectIdentifier" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">subjectIdentifier2</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">.SubjectIdentifier</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Order Voucher" enabled="true">
+          <stringProp name="WhileController.condition">${__jexl3(&quot;${StatusCode2}&quot; != 200,)}</stringProp>
+        </WhileController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Order Voucher (reqout)" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+&#xd;
+    &quot;TicketId&quot;: &quot;${ticketId2}&quot;,&#xd;
+    &quot;Subject&quot;: &quot;${subject2}&quot;,&#xd;
+    &quot;SubjectType&quot;: &quot;${subjectType2}&quot;,&#xd;
+    &quot;SubjectIdentifier&quot;: &quot;${subjectIdentifier2}&quot;&#xd;
+&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${staging}</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.path">${reqout}</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.image_parser">false</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">false</boolProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <boolProp name="HTTPSampler.md5">false</boolProp>
+            <intProp name="HTTPSampler.ipSourceType">0</intProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Platformkey</stringProp>
+                  <stringProp name="Header.value">${Platformkey}</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Idempotency-Key</stringProp>
+                  <stringProp name="Header.value">${idempotency}</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Authorization</stringProp>
+                  <stringProp name="Header.value">Bearer ${Token}</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">StatusCode2</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">.StatusCode</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+              <stringProp name="TestPlan.comments">statuscode</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="VoucherId" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">VoucherId</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">.Result.VoucherId</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="VoucherCode" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">VoucherCode</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">.Result.VoucherCode</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.PrintWriter;
+
+// Define the path to the CSV file
+def csvFilePath = &quot;C:/Users/lutfi/OneDrive/Dokumen/apache-jmeter-5.6.2/QRIS Voucher/voucher.csv&quot;
+
+// Define headers for CSV
+def headers = &quot;VoucherID,VoucherCode,\n&quot;
+
+// Check if the file already exists
+def file = new File(csvFilePath)
+def fileExists = file.exists()
+
+// Get the extracted data from JMeter variables
+String VoucherId = vars.get(&quot;VoucherId&quot;);
+String VoucherCode = vars.get(&quot;VoucherCode&quot;);
+
+// Write headers to the file only if the file doesn&apos;t exist
+if (!fileExists) {
+    def fileWriter = new FileWriter(file, true) // &apos;true&apos; flag for append mode
+    def bufferedWriter = new BufferedWriter(fileWriter)
+    bufferedWriter.write(headers)
+    bufferedWriter.close()
+}	
+
+// Write data to CSV file
+def fileWriter = new FileWriter(file, true) // &apos;true&apos; flag for append mode
+def bufferedWriter = new BufferedWriter(fileWriter)
+def PrintWriter printWriter = new PrintWriter(bufferedWriter);
+
+// Check if any of the data is null before writing to the file
+ if (VoucherId != null &amp;&amp; VoucherCode != null &amp;&amp; VoucherId != &quot;&quot; &amp;&amp; VoucherCode != &quot;&quot;) {
+      // Write data to the file
+      printWriter.println(VoucherId + &quot;,&quot; + VoucherCode + &quot;,&quot;);
+}
+
+// Close writers
+printWriter.close();
+bufferedWriter.close();</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
